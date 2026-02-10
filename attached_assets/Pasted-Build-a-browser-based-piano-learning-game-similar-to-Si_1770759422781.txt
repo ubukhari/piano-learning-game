@@ -1,0 +1,109 @@
+Build a browser-based piano learning game similar to Simply Piano, focused on one child and one song.
+
+The app must allow the child to play the entire song from start to finish, not just a short excerpt.
+
+The app runs entirely in the browser and uses the microphone to listen to a real piano being played. No backend is required.
+
+Core gameplay:
+- Guitar Hero–style vertical note lanes
+- Lanes labeled with note letters
+- Each falling note clearly displays its note name
+- Notes fall toward a hit line
+- When the played piano note matches the falling note (within tolerance), it counts as a hit
+- No penalties for missed notes
+
+Audio and pitch detection:
+- Use the Web Audio API
+- Request microphone access
+- Monophonic pitch detection only
+- Detect dominant pitch
+- Map detected frequency to nearest piano note (including black keys)
+- Ignore low-volume noise
+- Use generous pitch tolerance suitable for a child playing an acoustic piano
+
+Song scope:
+Implement only one song: “I Can’t Wait to Be King” (The Lion King).
+The song must be playable from start to finish (approximately 170 seconds).
+
+Difficulty levels:
+Implement only two levels.
+
+Level 1:
+- White keys only
+- Notes: C, D, E, F, G, A
+- Simplified but musically correct melody
+- One note approximately every 1.5 to 2.0 seconds
+- No sharps or flats
+
+Level 2:
+- Same song, same full length
+- Adds black keys where musically required
+- Includes notes such as Bb and F#
+- Slightly denser note timing
+- Still beginner-friendly
+
+Do not add additional levels.
+Timing rules are enforced only by the provided note charts, not by runtime logic.
+
+Song structure:
+Model the song using repeating melodic sections to cover the full duration.
+
+Sections (use exactly this order):
+INTRO
+VERSE
+CHORUS
+VERSE
+CHORUS
+OUTRO
+
+Level 1 section definitions (white keys only):
+
+const INTRO = [
+  { note: "C4", offset: 0.0 },
+  { note: "E4", offset: 1.8 },
+  { note: "G4", offset: 3.6 }
+];
+
+const VERSE = [
+  { note: "E4", offset: 0.0 },
+  { note: "G4", offset: 1.8 },
+  { note: "A4", offset: 3.6 },
+  { note: "G4", offset: 5.4 },
+  { note: "E4", offset: 7.2 }
+];
+
+const CHORUS = [
+  { note: "G4", offset: 0.0 },
+  { note: "A4", offset: 1.8 },
+  { note: "C5", offset: 3.6 },
+  { note: "A4", offset: 5.4 },
+  { note: "G4", offset: 7.2 }
+];
+
+const OUTRO = [
+  { note: "E4", offset: 0.0 },
+  { note: "D4", offset: 1.8 },
+  { note: "C4", offset: 3.6 }
+];
+
+Expand these sections in order to build a full song chart of approximately 170 seconds.
+
+Level 2 enhancements:
+- Reuse the same section structure
+- Add black-key notes (e.g., Bb, F#) in musically appropriate places
+- Increase note density slightly
+- Preserve melodic correctness
+
+UX constraints:
+- Extremely forgiving
+- Large readable note labels
+- Bright, simple visuals
+- Positive feedback only
+- No fail states
+
+Code structure:
+- Separate modules for pitch detection, song chart construction, rendering, and game loop
+- Include comments explaining key logic
+- Include instructions at the top explaining how to run the app in Replit
+
+Start with the simplest working version and keep the implementation straightforward.
